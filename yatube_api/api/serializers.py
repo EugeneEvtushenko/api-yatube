@@ -13,21 +13,20 @@ class AuthorMixin(serializers.ModelSerializer):
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = Group
-        fields = ('id', 'title', 'slug', 'description')
-        read_only_fields = fields
+        fields = '__all__'
+        read_only_fields = ('__all__',)
 
 
 class PostSerializer(AuthorMixin):
-    image = serializers.ImageField(required=False)
 
     class Meta:
         model = Post
-        fields = ('id', 'text', 'author', 'image', 'group', 'pub_date')
-        read_only_fields = ('author', 'pub_date')
+        fields = '__all__'
 
 
 class CommentSerializer(AuthorMixin):
     class Meta:
         model = Comment
-        fields = ('id', 'author', 'post', 'text', 'created')
-        read_only_fields = ('author', 'created', 'post')
+        fields = '__all__'
+
+        read_only_fields = ('post',)

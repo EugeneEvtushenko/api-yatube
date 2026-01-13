@@ -8,15 +8,15 @@ from api.views import CommentViewSet, GroupViewSet, PostViewSet
 app_name = 'api'
 
 
-router = DefaultRouter()
-router.register('posts', PostViewSet)
-router.register('groups', GroupViewSet)
-router.register(
+router_v1 = DefaultRouter()
+router_v1.register('posts', PostViewSet, basename='posts')
+router_v1.register('groups', GroupViewSet, basename='groups')
+router_v1.register(
     r'posts/(?P<post_id>\d+)/comments', CommentViewSet, basename='comments'
 )
 
 
 urlpatterns = [
-    path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
-    path('', include(router.urls)),
+    path('v1/api-token-auth/', obtain_auth_token, name='api_token_auth'),
+    path('v1/', include(router_v1.urls)),
 ]
