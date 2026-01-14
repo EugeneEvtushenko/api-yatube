@@ -14,7 +14,6 @@ class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = Group
         fields = '__all__'
-        read_only_fields = (fields,)
 
 
 class PostSerializer(AuthorMixin):
